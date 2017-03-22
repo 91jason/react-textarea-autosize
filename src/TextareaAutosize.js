@@ -128,9 +128,13 @@ export default class TextareaAutosize extends React.Component {
 
   _onRootDOMNode(node) {
     this._rootDOMNode = node;
+    this.value = node.value;
+    this.selectionStart = node.selectionStart;
+    this.selectionEnd = node.selectionEnd;
   }
 
   _onChange(e) {
+    this.value = this._rootDOMNode.value;
     this._resizeComponent();
     let {valueLink, onChange} = this.props;
     if (valueLink) {
@@ -147,48 +151,6 @@ export default class TextareaAutosize extends React.Component {
       useCacheForDOMMeasurements,
       this.props.rows || this.props.minRows,
       this.props.maxRows));
-  }
-
-  /**
-   * Read the current value of <textarea /> from DOM.
-   */
-  get value(): string {
-    return this._rootDOMNode.value;
-  }
-
-  /**
-   * Set the current value of <textarea /> DOM node.
-   */
-  set value(val) {
-    this._rootDOMNode.value = val;
-  }
-
-  /**
-   * Read the current selectionStart of <textarea /> from DOM.
-   */
-  get selectionStart(): number {
-    return this._rootDOMNode.selectionStart;
-  }
-
-  /**
-   * Set the current selectionStart of <textarea /> DOM node.
-   */
-  set selectionStart(selectionStart: number) {
-    this._rootDOMNode.selectionStart = selectionStart;
-  }
-
-  /**
-   * Read the current selectionEnd of <textarea /> from DOM.
-   */
-  get selectionEnd(): number {
-    return this._rootDOMNode.selectionEnd;
-  }
-
-  /**
-   * Set the current selectionEnd of <textarea /> DOM node.
-   */
-  set selectionEnd(selectionEnd: number) {
-    this._rootDOMNode.selectionEnd = selectionEnd;
   }
 
   /**
